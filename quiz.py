@@ -3,40 +3,50 @@ import os
 from questions_set1 import questions_set1  # Import the first set of questions
 from questions_set2 import questions_set2  # Import the second set of questions
 
-def ask_question(question_num, question, options, correct_answer, description):
+def ask_question(question_num, total_questions, question, options, correct_answer, description, answer=None):
     os.system('clear')  # Clear the screen before each question
     
     # Randomize the correct answer position while keeping the numbering 1-4
-    indices = [1, 2, 3, 4]
+    indices = list(range(len(options)))
     random.shuffle(indices)
-    new_correct_answer = indices.index(1) + 1  # The correct answer will have index 1 in the original list
+    shuffled_options = [options[i] for i in indices]
+    shuffled_correct_answer = indices.index(correct_answer - 1) + 1
     
-    # Display the question number and question
-    print(f"\nQuestion {question_num}\n")
+    # Display the question number and question out of the total
+    print(f"\nQuestion {question_num} of {total_questions}\n")
     print(f"{question}\n")
     
     # Display options with correct numbering
-    for idx, original_idx in enumerate(indices, 1):
-        print(f"{idx}. {options[original_idx - 1]}")
+    for idx, option in enumerate(shuffled_options, 1):
+        print(f"{idx}. {option}")
 
     print()  # Add a blank line for spacing
-    # Prompt the user to choose an option
-    answer = input("Choose the correct option (1-4): ")
     
+    if answer:
+        print(f"Your previous answer: {answer}")
+    else:
+        answer = input("Choose the correct option (1-4), or 'b' to go back: ").strip()
+    
+    # Handle back navigation
+    if answer.lower() == 'b':
+        return None, False  # Go back without saving an answer
+
     # Determine if the answer was correct
     correct_text = options[correct_answer - 1]
-    if answer == str(new_correct_answer):
+    if answer == str(shuffled_correct_answer):
         print("\nCorrect!\n")
+        is_correct = True
     else:
         print("\nWrong!\n")
         print(f"The correct answer is: {correct_text}\n")
+        is_correct = False
     
     # Show the description after the answer is given
     print(f"Description: {description}\n")
 
     input("Press Enter to continue...")  # Pause before moving to the next question
 
-    return answer == str(new_correct_answer)
+    return answer, is_correct
 
 def select_questions_set():
     print("Select the set of questions you want to answer:")
@@ -81,25 +91,60 @@ def main():
     if randomize_order:
         random.shuffle(selected_questions)
 
-    for i, q in enumerate(selected_questions, 1):  # Enumerate to get the question number
-        correct = ask_question(i, q["question"], q["options"], q["correct_answer"], q["description"])
-        if correct:
-            score += 1
+    answers = [None] * len(selected_questions)  # To keep track of user answers
+    total_questions = len(selected_questions)  # Total number of questions
+    current_question = 0
+
+    while current_question < len(selected_questions):
+        q = selected_questions[current_question]
+        answer, is_correct = ask_question(current_question + 1, total_questions, q["question"], q["options"], q["correct_answer"], q["description"], answers[current_question])
+        
+        if answer is not None:
+            answers[current_question] = answer
+            if is_correct:
+                score += 1
+            else:
+                wrong_questions.append(q)
+            current_question += 1  # Move to the next question
+        elif current_question > 0:
+            current_question -= 1  # Go back to the previous question
+
+    print(f"\nYour final score is {score}/{total_questions}")
+
+    # If there are unanswered questions, go back to them
+    for i, answer in enumerate(answers):
+        if answer is None:
+            current_question = i
+            break
+
+    while current_question < len(selected_questions):
+        if answers[current_question] is None:
+            q = selected_questions[current_question]
+            answer, is_correct = ask_question(current_question + 1, total_questions, q["question"], q["options"], q["correct_answer"], q["description"])
+            if answer is not None:
+                answers[current_question] = answer
+                if is_correct:
+                    score += 1
+                else:
+                    wrong_questions.append(q)
+                current_question += 1
         else:
-            wrong_questions.append(q)
+            current_question += 1
 
-    print(f"\nYour final score is {score}/{len(selected_questions)}")
-
-    # If there are wrong answers, offer to repeat them
+    # Offer to retry wrong questions
     if wrong_questions:
         print(f"\nYou got {len(wrong_questions)} questions wrong. Would you like to try them again? (y/n)")
         retry = input().strip().lower()
         if retry == 'y':
             print("\nRepeating wrong questions...\n")
-            if randomize_order:
-                random.shuffle(wrong_questions)
-            for i, q in enumerate(wrong_questions, 1):
-                ask_question(i, q["question"], q["options"], q["correct_answer"], q["description"])
+            wrong_question_index = 0
+            while wrong_question_index < len(wrong_questions):
+                q = wrong_questions[wrong_question_index]
+                answer, is_correct = ask_question(wrong_question_index + 1, len(wrong_questions), q["question"], q["options"], q["correct_answer"], q["description"])
+                if answer is not None:
+                    wrong_question_index += 1  # Move to the next question
+                elif wrong_question_index > 0:
+                    wrong_question_index -= 1  # Go back to the previous question
 
 if __name__ == "__main__":
     main()
