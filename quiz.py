@@ -40,8 +40,8 @@ def ask_question(question_num, question, options, correct_answer, description):
 
 def select_questions_set():
     print("Select the set of questions you want to answer:")
-    print("1. Original Questions")
-    print("2. New Questions (Essay Related)")
+    print("1. Question Set 1")
+    print("2. Question Set 2")
     print("3. Both Sets of Questions")
     choice = input("Enter the number of your choice: ").strip()
 

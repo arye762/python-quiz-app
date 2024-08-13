@@ -22,15 +22,15 @@ This Python Quiz Application is designed to help users test their knowledge on v
 
 Clone the Repository
    ```bash
-   git clone https://github.com/acimafranca/python-quiz-application.git
-   cd python-quiz-application
+   git clone https://github.com/arye762/python-quiz-app.git
+   cd python-quiz-app
    ```
 ## Running the Quiz on Ubuntu
 
 To run the Python quiz application on an Ubuntu machine, follow these steps:
 a. Navigate to the Project Directory:
    ```bash
-   cd /path/to/python-quiz-application
+   cd /path/to/python-quiz-app
    ```
 b. Run the Python Script:
    ```bash
@@ -43,8 +43,8 @@ This command will start the quiz, and you can follow the on-screen prompts to se
 ### Select a Question Set
 
 Upon running the quiz, you will be prompted to choose between different sets of questions:
-- Option 1: Original questions (from questions_set1.py).
-- Option 2: New essay-related questions (from questions_set2.py).
+- Option 1: Questions Set 1 (from questions_set1.py).
+- Option 2: Questions Set 2 (from questions_set2.py).
 - Option 3: Both sets of questions combined.
 
 ### Answer Questions
