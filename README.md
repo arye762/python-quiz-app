@@ -47,6 +47,12 @@ Upon running the quiz, you will be prompted to choose between different sets of 
 - Option 2: Questions Set 2 (from questions_set2.py).
 - Option 3: Both sets of questions combined.
 
+### Choose Question Ordering
+
+After selecting a question set, you will be prompted to choose whether the questions should be presented in a randomized order or in the order they appear in the set:
+- Option 1: Randomized Order
+- Option 2: Sequential Order
+
 ### Answer Questions
 
 - For each question, select the correct answer by entering the corresponding number (1-4).

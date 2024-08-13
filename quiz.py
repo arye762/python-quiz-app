@@ -55,14 +55,31 @@ def select_questions_set():
         print("Invalid choice. Defaulting to both sets of questions.")
         return questions_set1 + questions_set2
 
+def choose_ordering():
+    print("\nHow would you like the questions to be ordered?")
+    print("1. Randomized")
+    print("2. In Order")
+    choice = input("Enter the number of your choice: ").strip()
+
+    if choice == '1':
+        return True  # Randomize
+    elif choice == '2':
+        return False  # In order
+    else:
+        print("Invalid choice. Defaulting to randomized order.")
+        return True
+
 def main():
     score = 0
     wrong_questions = []
 
     selected_questions = select_questions_set()
 
-    # Randomize the order of questions
-    random.shuffle(selected_questions)
+    # Choose whether to randomize the questions or keep them in order
+    randomize_order = choose_ordering()
+
+    if randomize_order:
+        random.shuffle(selected_questions)
 
     for i, q in enumerate(selected_questions, 1):  # Enumerate to get the question number
         correct = ask_question(i, q["question"], q["options"], q["correct_answer"], q["description"])
@@ -79,7 +96,8 @@ def main():
         retry = input().strip().lower()
         if retry == 'y':
             print("\nRepeating wrong questions...\n")
-            random.shuffle(wrong_questions)
+            if randomize_order:
+                random.shuffle(wrong_questions)
             for i, q in enumerate(wrong_questions, 1):
                 ask_question(i, q["question"], q["options"], q["correct_answer"], q["description"])
 

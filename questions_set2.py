@@ -353,7 +353,7 @@ questions_set2 = [
 },
 
 # Question about Bridge Mode in Access Points
-question_ap_bridge_mode = {
+{
     "question": "What does Bridge Mode do in an Access Point (AP)?",
     "options": [
         "The AP operates as the central hub for a BSS, allowing clients to connect to the network.",
