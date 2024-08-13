@@ -363,7 +363,7 @@ question_ap_bridge_mode = {
     ],
     "correct_answer": 2,
     "description": "In Bridge Mode, the Access Point (AP) connects two separate networks, extending the coverage area."
-}
+},
 
 # Question about Repeater Mode in Access Points
 {
