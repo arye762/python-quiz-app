@@ -20,7 +20,7 @@ This Python Quiz Application is designed to help users test their knowledge on v
 
 ## Setup
 
-1. **Clone the Repository**:
+Clone the Repository
    ```bash
    git clone https://github.com/acimafranca/python-quiz-application.git
    cd python-quiz-application
