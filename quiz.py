@@ -1,11 +1,15 @@
 import random
 import os
+import time
 from questions_set1 import questions_set1  # Import the first set of questions
 from questions_set2 import questions_set2  # Import the second set of questions
 
-def ask_question(question_num, total_questions, question, options, correct_answer, description, answer=None):
+def ask_question(question_num, total_questions, question, options, correct_answer, description):
     os.system('clear')  # Clear the screen before each question
     
+    # Display the score and elapsed time
+    print(f"Score: {score} | Time: {time_elapsed()}")
+
     # Randomize the correct answer position while keeping the numbering 1-4
     indices = list(range(len(options)))
     random.shuffle(indices)
@@ -22,10 +26,7 @@ def ask_question(question_num, total_questions, question, options, correct_answe
 
     print()  # Add a blank line for spacing
     
-    if answer:
-        print(f"Your previous answer: {answer}")
-    else:
-        answer = input("Choose the correct option (1-4), or 'b' to go back: ").strip()
+    answer = input("Choose the correct option (1-4), or 'b' to go back: ").strip()
     
     # Handle back navigation
     if answer.lower() == 'b':
@@ -79,9 +80,18 @@ def choose_ordering():
         print("Invalid choice. Defaulting to randomized order.")
         return True
 
+def time_elapsed():
+    elapsed_time = time.time() - start_time
+    minutes = int(elapsed_time // 60)
+    seconds = int(elapsed_time % 60)
+    return f"{minutes}m {seconds}s"
+
 def main():
+    global score
     score = 0
     wrong_questions = []
+    global start_time
+    start_time = time.time()
 
     selected_questions = select_questions_set()
 
@@ -97,39 +107,27 @@ def main():
 
     while current_question < len(selected_questions):
         q = selected_questions[current_question]
-        answer, is_correct = ask_question(current_question + 1, total_questions, q["question"], q["options"], q["correct_answer"], q["description"], answers[current_question])
+        answer, is_correct = ask_question(current_question + 1, total_questions, q["question"], q["options"], q["correct_answer"], q["description"])
         
         if answer is not None:
+            if answers[current_question] is None:  # Only add to score if it's the first attempt at the question
+                if is_correct:
+                    score += 1
+                else:
+                    wrong_questions.append(current_question)
+            elif answers[current_question] != answer:  # Adjust the score if the answer changes on retry
+                previous_correct = answers[current_question] == str(q["correct_answer"])
+                if is_correct and not previous_correct:
+                    score += 1
+                elif not is_correct and previous_correct:
+                    score -= 1
+
             answers[current_question] = answer
-            if is_correct:
-                score += 1
-            else:
-                wrong_questions.append(q)
             current_question += 1  # Move to the next question
         elif current_question > 0:
             current_question -= 1  # Go back to the previous question
 
     print(f"\nYour final score is {score}/{total_questions}")
-
-    # If there are unanswered questions, go back to them
-    for i, answer in enumerate(answers):
-        if answer is None:
-            current_question = i
-            break
-
-    while current_question < len(selected_questions):
-        if answers[current_question] is None:
-            q = selected_questions[current_question]
-            answer, is_correct = ask_question(current_question + 1, total_questions, q["question"], q["options"], q["correct_answer"], q["description"])
-            if answer is not None:
-                answers[current_question] = answer
-                if is_correct:
-                    score += 1
-                else:
-                    wrong_questions.append(q)
-                current_question += 1
-        else:
-            current_question += 1
 
     # Offer to retry wrong questions
     if wrong_questions:
@@ -137,14 +135,22 @@ def main():
         retry = input().strip().lower()
         if retry == 'y':
             print("\nRepeating wrong questions...\n")
-            wrong_question_index = 0
-            while wrong_question_index < len(wrong_questions):
-                q = wrong_questions[wrong_question_index]
-                answer, is_correct = ask_question(wrong_question_index + 1, len(wrong_questions), q["question"], q["options"], q["correct_answer"], q["description"])
+            for i in wrong_questions:
+                q = selected_questions[i]
+                answer, is_correct = ask_question(i + 1, total_questions, q["question"], q["options"], q["correct_answer"], q["description"])
+                
+                # Allow re-answering the question
                 if answer is not None:
-                    wrong_question_index += 1  # Move to the next question
-                elif wrong_question_index > 0:
-                    wrong_question_index -= 1  # Go back to the previous question
+                    previous_answer = answers[i]
+                    previous_correct = previous_answer == str(q["correct_answer"])
+                    if previous_answer != answer:
+                        if is_correct and not previous_correct:
+                            score += 1
+                        elif not is_correct and previous_correct:
+                            score -= 1
+                    answers[i] = answer
+
+            print(f"\nYour final score after retry is {score}/{total_questions}")
 
 if __name__ == "__main__":
     main()
