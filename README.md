@@ -2,6 +2,8 @@
 
 This Python Quiz Application is designed to help users test their knowledge on various topics, particularly focused on networking concepts. The application allows users to select from different sets of questions, receive immediate feedback after each question, and retry questions they answered incorrectly.
 
+![Screenshot 2024-08-12 at 8 34 54 PM](https://github.com/user-attachments/assets/a4f387ab-f13b-48fb-8e78-4dd0a5525cf5)
+
 ## Features
 
 - **Multiple Question Sets**: Users can choose between different sets of questions (e.g., original questions, essay-related questions).
@@ -23,3 +25,5 @@ This Python Quiz Application is designed to help users test their knowledge on v
    git clone https://github.com/acimafranca/python-quiz-application.git
    cd python-quiz-application
 
+## Disclaimer
+This Python Quiz Application was conceptualized by Arie Cimafranca. The code implementation was generated with the assistance of ChatGPT.
