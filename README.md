@@ -24,6 +24,38 @@ This Python Quiz Application is designed to help users test their knowledge on v
    ```bash
    git clone https://github.com/acimafranca/python-quiz-application.git
    cd python-quiz-application
+   ```
+## Running the Quiz on Ubuntu
+
+To run the Python quiz application on an Ubuntu machine, follow these steps:
+a. Navigate to the Project Directory:
+   ```bash
+   cd /path/to/python-quiz-application
+   ```
+b. Run the Python Script:
+   ```bash
+   python3 quiz.py
+   ```
+This command will start the quiz, and you can follow the on-screen prompts to select a question set and begin answering questions.
+
+## Usage 
+
+### Select a Question Set
+
+Upon running the quiz, you will be prompted to choose between different sets of questions:
+- Option 1: Original questions (from questions_set1.py).
+- Option 2: New essay-related questions (from questions_set2.py).
+- Option 3: Both sets of questions combined.
+
+### Answer Questions
+
+- For each question, select the correct answer by entering the corresponding number (1-4).
+- After each question, you will receive immediate feedback indicating whether your answer was correct or wrong, along with a description of the correct answer.
+
+### Retry Incorrect Questions
+
+- After completing the quiz, you will have the option to retry any questions you answered incorrectly.
 
 ## Disclaimer
+
 This Python Quiz Application was conceptualized by Arie Cimafranca. The code implementation was generated with the assistance of ChatGPT.
