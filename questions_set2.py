@@ -318,17 +318,7 @@ questions_set2 = [
     "correct_answer": 1,
     "description": "In Root Mode, the Access Point (AP) operates as the central hub for a Basic Service Set (BSS), allowing clients to connect to the network."
 },
-    {
-        "question": "What does Bridge Mode do in an Access Point (AP)?",
-        "options": [
-            "The AP operates as the central hub for a BSS, allowing clients to connect to the network.",
-            "The AP connects two separate networks, extending the coverage area.",
-            "The AP extends the range of an existing wireless network by repeating the signal.",
-            "The AP participates in a mesh network, providing seamless coverage over a large area."
-        ],
-        "correct_answer": 2,
-        "description": "In Bridge Mode, the Access Point (AP) connects two separate networks, extending the coverage area."
-    },
+
     {
         "question": "What is the purpose of Repeater Mode in an Access Point (AP)?",
         "options": [
