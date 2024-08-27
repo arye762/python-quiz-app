@@ -14,7 +14,11 @@ def ask_question(question_num, total_questions, question, options, correct_answe
     indices = list(range(len(options)))
     random.shuffle(indices)
     shuffled_options = [options[i] for i in indices]
-    shuffled_correct_answer = indices.index(correct_answer - 1) + 1
+    
+    if isinstance(correct_answer, list):
+        shuffled_correct_answer = [indices.index(ans - 1) + 1 for ans in correct_answer]
+    else:
+        shuffled_correct_answer = indices.index(correct_answer - 1) + 1
     
     # Display the question number and question out of the total
     print(f"\nQuestion {question_num} of {total_questions}\n")
@@ -26,21 +30,31 @@ def ask_question(question_num, total_questions, question, options, correct_answe
 
     print()  # Add a blank line for spacing
     
-    answer = input("Choose the correct option (1-4), or 'b' to go back: ").strip()
+    answer = input("Choose the correct option (e.g., '1 4' for multiple answers), or 'b' to go back: ").strip()
     
     # Handle back navigation
     if answer.lower() == 'b':
         return None, False  # Go back without saving an answer
 
+    try:
+        # Parse the user's answer into a list of integers
+        user_answers = list(map(int, answer.split()))
+    except ValueError:
+        print("\nInvalid input. Please enter numbers separated by spaces.\n")
+        return None, False
+
     # Determine if the answer was correct
-    correct_text = options[correct_answer - 1]
-    if answer == str(shuffled_correct_answer):
+    correct_text = [options[i - 1] for i in correct_answer] if isinstance(correct_answer, list) else options[correct_answer - 1]
+    if isinstance(correct_answer, list):
+        is_correct = sorted(user_answers) == sorted(shuffled_correct_answer)
+    else:
+        is_correct = user_answers == [shuffled_correct_answer]
+    
+    if is_correct:
         print("\nCorrect!\n")
-        is_correct = True
     else:
         print("\nWrong!\n")
         print(f"The correct answer is: {correct_text}\n")
-        is_correct = False
     
     # Show the description after the answer is given
     print(f"Description: {description}\n")
