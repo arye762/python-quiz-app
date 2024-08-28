@@ -2,12 +2,11 @@ import random
 import os
 import time
 import subprocess
-from PIL import Image  # Import the PIL library to handle images
 from questions_set1 import questions_set1  # Import the first set of questions
 from questions_set2 import questions_set2  # Import the second set of questions
 
 
-def ask_question(question_num, total_questions, question, options, correct_answer, description, image=None):
+def ask_question(question_num, total_questions, question, options, correct_answer, description):
     os.system('clear')  # Clear the screen before each question
 
     print(f"Score: {score} | Time: {time_elapsed()}")
@@ -24,25 +23,6 @@ def ask_question(question_num, total_questions, question, options, correct_answe
 
     print(f"\nQuestion {question_num} of {total_questions}\n")
     print(f"{question}\n")
-
-    # Display the image if provided and enabled
-    if image and image_enabled:
-        try:
-            print(f"Loading image: {image}")  # Debugging: print the image path
-
-            # Close the Preview app before showing the new image
-            subprocess.call(["osascript", "-e", 'tell application "Preview" to quit'])
-
-            # Open the image directly with Preview
-            subprocess.call(["open", image])
-
-            time.sleep(1)  # Give time for the image to display
-
-            # Bring terminal back to the foreground
-            subprocess.call(["osascript", "-e", 'tell application "Terminal" to activate'])
-
-        except Exception as e:
-            print(f"Error loading image: {e}")
 
     for idx, option in enumerate(shuffled_options, 1):
         print(f"{idx}. {option}")
@@ -72,10 +52,6 @@ def ask_question(question_num, total_questions, question, options, correct_answe
     print(f"Description: {description}\n")
 
     input("Press Enter to continue...")  # Pause before moving to the next question
-
-    # Close the image before moving to the next question if images are enabled
-    if image_enabled:
-        subprocess.call(["osascript", "-e", 'tell application "Preview" to quit'])
 
     return answer, is_correct
 
@@ -111,20 +87,6 @@ def choose_ordering():
         print("Invalid choice. Defaulting to randomized order.")
         return True
 
-def enable_images():
-    print("\nWould you like to enable images in the questions?")
-    print("1. Yes")
-    print("2. No")
-    choice = input("Enter the number of your choice: ").strip()
-
-    if choice == '1':
-        return True
-    elif choice == '2':
-        return False
-    else:
-        print("Invalid choice. Defaulting to images enabled.")
-        return True
-
 def time_elapsed():
     elapsed_time = time.time() - start_time
     minutes = int(elapsed_time // 60)
@@ -133,7 +95,6 @@ def time_elapsed():
 
 def main():
     global score
-    global image_enabled
     score = 0
     wrong_questions = []
     global start_time
@@ -143,9 +104,6 @@ def main():
 
     # Choose whether to randomize the questions or keep them in order
     randomize_order = choose_ordering()
-
-    # Enable or disable images
-    image_enabled = enable_images()
 
     if randomize_order:
         random.shuffle(selected_questions)
@@ -162,8 +120,7 @@ def main():
             q["question"], 
             q["options"], 
             q["correct_answer"], 
-            q["description"],
-            q.get("image", None)  # Pass the image path if it exists
+            q["description"]
         )
         
         if answer is not None:
@@ -200,8 +157,7 @@ def main():
                     q["question"], 
                     q["options"], 
                     q["correct_answer"], 
-                    q["description"],
-                    q.get("image", None)  # Pass the image path if it exists
+                    q["description"]
                 )
                 
                 # Allow re-answering the question
