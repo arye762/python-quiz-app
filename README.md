@@ -2,7 +2,7 @@
 
 This Python Quiz Application is designed to help users test their knowledge on various topics, particularly focused on networking concepts. The application allows users to select from different sets of questions, receive immediate feedback after each question, and retry questions they answered incorrectly.
 
-![Screenshot 2024-08-12 at 8 34 54 PM](https://github.com/user-attachments/assets/a4f387ab-f13b-48fb-8e78-4dd0a5525cf5)
+![Python-quiz-app](https://github.com/user-attachments/assets/7a4ca4fa-097a-4793-b848-971c380d8ae3)
 
 ## Features
 
