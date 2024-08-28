@@ -2,8 +2,9 @@ import random
 import os
 import time
 import subprocess
-import webbrowser  # Import the webbrowser module
 from PIL import Image  # Import the PIL library to handle images
+from questions_set1 import questions_set1  # Import the first set of questions
+from questions_set2 import questions_set2  # Import the second set of questions
 
 
 def ask_question(question_num, total_questions, question, options, correct_answer, description, image=None):
@@ -81,13 +82,20 @@ def ask_question(question_num, total_questions, question, options, correct_answe
 
 def select_questions_set():
     print("Select the set of questions you want to answer:")
+    print("1. Question Set 1")
+    print("2. Question Set 2")
+    print("3. Both Sets")
     choice = input("Enter the number of your choice: ").strip()
 
     if choice == '1':
+        return questions_set1
     elif choice == '2':
+        return questions_set2
     elif choice == '3':
         return questions_set1 + questions_set2
     else:
+        print("Invalid choice. Defaulting to both sets of questions.")
+        return questions_set1 + questions_set2
 
 def choose_ordering():
     print("\nHow would you like the questions to be ordered?")
