@@ -1,277 +1,435 @@
+# General Security Concepts
 questions_set1 = [
     {
-        "question": "What does RADIUS stand for?",
+        "question": "A company is developing a business continuity strategy and needs to determine how many staff members would be required to sustain the business in the case of a disruption. Which of the following best describes this step?",
         "options": [
-            "Remote Authentication Dial-In User Service",
-            "Remote Access Dial-In User Service",
-            "Remote Authentication Digital Interface Service",
-            "Remote Access Data Interchange Service"
+            "Capacity planning",
+            "Redundancy",
+            "Geographic dispersion",
+            "Tabletop exercise"
         ],
         "correct_answer": 1,
-        "description": "RADIUS (Remote Authentication Dial-In User Service) - A networking protocol that provides centralized Authentication, Authorization, and Accounting (AAA) management for users who connect and use a network service."
+        "description": "Capacity planning involves determining the resources required to sustain business operations during disruptions."
     },
     {
-        "question": "What does LDAP stand for?",
+        "question": "A company requires hard drives to be securely wiped before sending decommissioned systems to recycling. Which of the following best describes this policy?",
         "options": [
-            "Lightweight Directory Access Protocol",
-            "Local Directory Access Protocol",
-            "Lightweight Data Access Protocol",
-            "Local Data Access Protocol"
+            "Enumeration",
+            "Sanitization",
+            "Destruction",
+            "Inventory"
         ],
-        "correct_answer": 1,
-        "description": "LDAP (Lightweight Directory Access Protocol) - An open, vendor-neutral protocol for accessing and maintaining distributed directory information services over an Internet Protocol (IP) network."
+        "correct_answer": 2,
+        "description": "Sanitization refers to securely wiping data from storage devices to ensure that it cannot be recovered, especially before disposing or repurposing the devices."
     },
     {
-        "question": "What does EAP stand for?",
+        "question": "A U.S.-based cloud-hosting provider wants to expand its data centers to new international locations. Which of the following should the hosting provider consider first?",
         "options": [
-            "Extensible Authentication Protocol",
-            "Encrypted Access Protocol",
-            "Extensible Access Protocol",
-            "Encrypted Authentication Protocol"
+            "Local data protection regulations",
+            "Risks from hackers residing in other countries",
+            "Impacts to existing contractual obligations",
+            "Time zone differences in log correlation"
         ],
         "correct_answer": 1,
-        "description": "EAP (Extensible Authentication Protocol) - An authentication framework frequently used in wireless networks and point-to-point connections. It provides a variety of authentication mechanisms."
+        "description": "Local data protection regulations are crucial when expanding to international locations, as they govern how data must be handled and protected."
     },
     {
-        "question": "What does DCF stand for in Wi-Fi networks?",
+        "question": "Which of the following is the most likely outcome if a large bank fails an internal PCI DSS compliance assessment?",
         "options": [
-            "Distributed Coordination Function",
-            "Direct Coordination Function",
-            "Dynamic Coordination Function",
-            "Data Coordination Function"
+            "Fines",
+            "Audit findings",
+            "Sanctions",
+            "Reputation damage"
         ],
         "correct_answer": 1,
-        "description": "DCF (Distributed Coordination Function) - A fundamental access method of the IEEE 802.11 standard for wireless LANs, which uses CSMA/CA to avoid collisions."
+        "description": "Failure to comply with PCI DSS can lead to significant fines and penalties, especially for large financial institutions."
     },
     {
-        "question": "What does ESSID stand for?",
+        "question": "Which of the following must be considered when designing a high-availability network? (Choose two).",
         "options": [
-            "Extended Service Set Identifier",
-            "External Service Set Identifier",
-            "Extended Signal Set Identifier",
-            "External Signal Set Identifier"
+            "Ease of recovery",
+            "Ability to patch",
+            "Physical isolation",
+            "Responsiveness",
+            "Attack surface",
+            "Extensible authentication"
         ],
-        "correct_answer": 1,
-        "description": "ESSID (Extended Service Set Identifier) - The name assigned to a Wi-Fi network, allowing devices to distinguish between different networks."
+        "correct_answer": [1, 4],
+        "description": "High-availability networks require careful consideration of factors like ease of recovery and responsiveness to ensure minimal downtime."
+    },
+
+# Threats, Vulnerabilities, and Mitigation
+
+    {
+        "question": "Which of the following threat actors is the most likely to be hired by a foreign government to attack critical systems located in other countries?",
+        "options": [
+            "Hacktivist",
+            "Whistleblower",
+            "Organized crime",
+            "Unskilled attacker"
+        ],
+        "correct_answer": 3,
+        "description": "Organized crime groups are often highly skilled and have the resources to conduct sophisticated cyber-attacks, sometimes in collaboration with foreign governments."
     },
     {
-        "question": "What does PBSS stand for?",
+        "question": "Which of the following is used to add extra complexity before using a one-way data transformation algorithm?",
         "options": [
-            "Personal Basic Service Set",
-            "Private Basic Service Set",
-            "Public Basic Service Set",
-            "Personal Broadcast Service Set"
+            "Key stretching",
+            "Data masking",
+            "Steganography",
+            "Salting"
         ],
-        "correct_answer": 1,
-        "description": "PBSS (Personal Basic Service Set) - A type of service set used in IEEE 802.11ad, typically for personal area networks, coordinated by a PBSS control point."
+        "correct_answer": 4,
+        "description": "Salting is the process of adding extra complexity before applying a one-way data transformation algorithm to protect against brute-force attacks."
     },
     {
-        "question": "What does AES stand for?",
+        "question": "An employee clicked a link in an email from a payment website that asked the employee to update contact information. The employee entered the log-in information but received a 'page not found' error message. Which of the following types of social engineering attacks occurred?",
         "options": [
-            "Advanced Encryption Standard",
-            "Automatic Encryption Standard",
-            "Advanced Encoding Standard",
-            "Automatic Encoding Standard"
+            "Brand impersonation",
+            "Pretexting",
+            "Typosquatting",
+            "Phishing"
         ],
-        "correct_answer": 1,
-        "description": "AES (Advanced Encryption Standard) - A symmetric encryption algorithm widely used across the globe to secure data."
+        "correct_answer": 4,
+        "description": "Phishing is a type of social engineering attack where an attacker sends fraudulent communications that appear to come from a reputable source, usually through email."
     },
     {
-        "question": "What does MIMO stand for?",
+        "question": "Which of the following scenarios describes a possible business email compromise attack?",
         "options": [
-            "Multiple-Input Multiple-Output",
-            "Multiple-Interface Multiple-Output",
-            "Multiple-Interface Multi-Output",
-            "Multi-Input Multi-Output"
+            "An employee receives a gift card request in an email that has an executive’s name in the display field of the email.",
+            "Employees who open an email attachment receive messages demanding payment in order to access files.",
+            "A service desk employee receives an email from the HR director asking for log-in credentials to a cloud administrator account.",
+            "An employee receives an email with a link to a phishing site that is designed to look like the company’s email portal."
         ],
         "correct_answer": 1,
-        "description": "MIMO (Multiple-Input Multiple-Output) - A method for multiplying the capacity of a radio link using multiple transmission and receiving antennas to exploit multipath propagation."
+        "description": "A Business Email Compromise (BEC) attack involves using a spoofed or compromised email account to trick employees into transferring money or revealing confidential information."
     },
     {
-        "question": "What does NAV stand for?",
+        "question": "A security analyst is reviewing logs that indicate multiple failed login attempts across several user accounts from different IP addresses. Which of the following attacks is most likely occurring?",
         "options": [
-            "Network Allocation Vector",
-            "Network Access Vector",
-            "Network Allocation Value",
-            "Network Access Value"
+            "Password spraying",
+            "Account forgery",
+            "Pass-the-hash",
+            "Brute-force"
         ],
         "correct_answer": 1,
-        "description": "NAV (Network Allocation Vector) - A virtual carrier sensing mechanism used in Wi-Fi networks to determine when the medium is free to transmit data."
+        "description": "Password spraying is the attack where an attacker tries a small set of commonly used passwords across many accounts."
     },
     {
-        "question": "What does WEP stand for?",
+        "question": "A security team is reviewing the findings in a report that was delivered after a third party performed a penetration test. One of the findings indicated that a web application form field is vulnerable to cross-site scripting. Which of the following application security techniques should the security analyst recommend the developer implement to prevent this vulnerability?",
         "options": [
-            "Wired Equivalent Privacy",
-            "Wireless Encryption Protocol",
-            "Wired Encryption Protocol",
-            "Wireless Equivalent Privacy"
+            "Secure cookies",
+            "Version control",
+            "Input validation",
+            "Code signing"
         ],
-        "correct_answer": 1,
-        "description": "WEP (Wired Equivalent Privacy) - A security protocol that was designed to provide wireless networks with a level of security comparable to that of a wired LAN. It has been largely replaced by more secure protocols."
+        "correct_answer": 3,
+        "description": "Input validation ensures that user inputs are properly sanitized before being processed by the application, helping prevent cross-site scripting (XSS) attacks."
     },
     {
-        "question": "What does TKIP stand for?",
+        "question": "Which of the following vulnerabilities is associated with installing software outside of a manufacturer’s approved software repository?",
         "options": [
-            "Temporal Key Integrity Protocol",
-            "Time-based Key Integrity Protocol",
-            "Transport Key Integrity Protocol",
-            "Temporal Key Interchange Protocol"
+            "Jailbreaking",
+            "Memory injection",
+            "Resource reuse",
+            "Side loading"
         ],
-        "correct_answer": 1,
-        "description": "TKIP (Temporal Key Integrity Protocol) - A security protocol used in the WPA encryption standard for securing wireless computer networks."
+        "correct_answer": 4,
+        "description": "Side loading is the vulnerability associated with installing software outside of a manufacturer’s approved software repository."
     },
     {
-        "question": "What does WPA2 stand for?",
+        "question": "Which of the following is a hardware-specific vulnerability?",
         "options": [
-            "Wi-Fi Protected Access 2",
-            "Wireless Protected Access 2",
-            "Wi-Fi Privacy Access 2",
-            "Wireless Privacy Access 2"
+            "Firmware version",
+            "Buffer overflow",
+            "SQL injection",
+            "Cross-site scripting"
         ],
         "correct_answer": 1,
-        "description": "WPA2 (Wi-Fi Protected Access 2) - A security protocol that uses AES encryption and is the second version of WPA, providing stronger data protection and network access control."
+        "description": "Firmware vulnerabilities are specific to the hardware on which the firmware is running."
     },
     {
-        "question": "What does WPA3 stand for?",
+        "question": "A company purchased cyber insurance to address items listed on the risk register. Which of the following strategies does this represent?",
         "options": [
-            "Wi-Fi Protected Access 3",
-            "Wireless Protected Access 3",
-            "Wi-Fi Privacy Access 3",
-            "Wireless Privacy Access 3"
+            "Accept",
+            "Transfer",
+            "Mitigate",
+            "Avoid"
         ],
-        "correct_answer": 1,
-        "description": "WPA3 (Wi-Fi Protected Access 3) - The latest version of WPA, which enhances security by using more robust encryption methods and better protections for public networks."
+        "correct_answer": 2,
+        "description": "Purchasing cyber insurance represents the risk transfer strategy."
     },
     {
-        "question": "What does OFDM stand for?",
+        "question": "Which of the following describes the reason root cause analysis should be conducted as part of incident response?",
         "options": [
-            "Orthogonal Frequency Division Multiplexing",
-            "Orthogonal Frequency Division Modulation",
-            "Orthogonal Frequency Digital Multiplexing",
-            "Orthogonal Frequency Digital Modulation"
+            "To gather IoCs for the investigation",
+            "To discover which systems have been affected",
+            "To eradicate any trace of malware on the network",
+            "To prevent future incidents of the same nature"
+        ],
+        "correct_answer": 4,
+        "description": "Conducting a root cause analysis helps identify the underlying issues to prevent similar incidents in the future."
+    },
+
+# Security Architecture
+
+    {
+        "question": "A company prevented direct access from the database administrators’ workstations to the network segment that contains database servers. Which of the following should a database administrator use to access the database servers?",
+        "options": [
+            "Jump server",
+            "RADIUS",
+            "HSM",
+            "Load balancer"
         ],
         "correct_answer": 1,
-        "description": "OFDM (Orthogonal Frequency Division Multiplexing) - A method of encoding digital data on multiple carrier frequencies, widely used in Wi-Fi, LTE, and digital television broadcasting."
+        "description": "A jump server is a secure system used to manage devices in a separate security zone."
     },
     {
-        "question": "What does PCF stand for in Wi-Fi networks?",
+        "question": "Which of the following methods is used to create an added layer of security by preventing unauthorized access to internal company resources?",
         "options": [
-            "Point Coordination Function",
-            "Personal Coordination Function",
-            "Primary Coordination Function",
-            "Packet Coordination Function"
+            "RDP server",
+            "Jump server",
+            "Proxy server",
+            "Hypervisor"
         ],
-        "correct_answer": 1,
-        "description": "PCF (Point Coordination Function) - A media access control (MAC) technique used in Wi-Fi networks, functioning in conjunction with DCF for more controlled access to the wireless medium."
+        "correct_answer": 2,
+        "description": "A Jump server creates an added layer of security by preventing unauthorized access to internal company resources."
     },
     {
-        "question": "What does DSSS stand for?",
+        "question": "A data administrator is configuring authentication for a SaaS application and would like to reduce the number of credentials employees need to maintain. The company prefers to use domain credentials to access new SaaS applications. Which of the following methods would allow this functionality?",
         "options": [
-            "Direct Sequence Spread Spectrum",
-            "Direct Signal Spread Spectrum",
-            "Distributed Sequence Spread Spectrum",
-            "Distributed Signal Spread Spectrum"
+            "SSO",
+            "LEAP",
+            "MFA",
+            "PEAP"
         ],
         "correct_answer": 1,
-        "description": "DSSS (Direct Sequence Spread Spectrum) - A transmission technology used in Wi-Fi where a data signal at the sending station is combined with a higher data rate bit sequence, which increases resistance to interference."
+        "description": "Single Sign-On (SSO) allows employees to use domain credentials to access SaaS applications, reducing the number of credentials they need to maintain."
     },
     {
-        "question": "What does DFS stand for?",
+        "question": "Which of the following scenarios best describes a Zero Trust principle in action?",
         "options": [
-            "Dynamic Frequency Selection",
-            "Direct Frequency Selection",
-            "Distributed Frequency Selection",
-            "Digital Frequency Selection"
+            "Using secured zones within the data plane to minimize access",
+            "Implementing a bastion host for administrative access",
+            "Using MFA for all network logins",
+            "Ensuring all devices have antivirus software installed"
         ],
         "correct_answer": 1,
-        "description": "DFS (Dynamic Frequency Selection) - A mechanism used in wireless networks to avoid interference with radar signals by dynamically selecting the best frequency channel."
+        "description": "Zero Trust principles include using secured zones within the data plane to minimize access and protect critical resources."
     },
     {
-        "question": "What does TPC stand for?",
+        "question": "An organization’s internet-facing website was compromised when an attacker exploited a buffer overflow. Which of the following should the organization deploy to best protect against similar attacks in the future?",
         "options": [
-            "Transmit Power Control",
-            "Transmission Power Control",
-            "Transfer Power Control",
-            "Transport Power Control"
+            "NGFW",
+            "WAF",
+            "TLS",
+            "SD-WAN"
         ],
-        "correct_answer": 1,
-        "description": "TPC (Transmit Power Control) - A feature in wireless networks that allows the adjustment of the power level of a transmitter to reduce interference and optimize battery life."
+        "correct_answer": 2,
+        "description": "A Web Application Firewall (WAF) protects web applications by filtering and monitoring HTTP traffic between a web application and the Internet."
     },
     {
-        "question": "What does WNM stand for?",
+        "question": "An enterprise is trying to limit outbound DNS traffic originating from its internal network. Outbound DNS requests will only be allowed from one device with the IP address 10.50.10.25. Which of the following firewall ACLs will accomplish this goal?",
         "options": [
-            "Wireless Network Management",
-            "Wired Network Management",
-            "Wide Network Management",
-            "Wireless Node Management"
+            "Access list outbound permit 0.0.0.0/0 0.0.0.0/0 port 53. Access list outbound deny 10.50.10.25/32 0.0.0.0/0 port 53.",
+            "Access list outbound permit 0.0.0.0/0 10.50.10.25/32 port 53. Access list outbound deny 0.0.0.0/0 0.0.0.0/0 port 53.",
+            "Access list outbound permit 0.0.0.0/0 0.0.0.0/0 port 53. Access list outbound deny 0.0.0.0/0 10.50.10.25/32 port 53.",
+            "Access list outbound permit 10.50.10.25/32 0.0.0.0/0 port 53. Access list outbound deny 0.0.0.0/0 0.0.0.0/0 port 53."
         ],
-        "correct_answer": 1,
-        "description": "WNM (Wireless Network Management) - A set of features in Wi-Fi networks that help manage and optimize network performance, mobility, and user experience."
+        "correct_answer": 3,
+        "description": "This rule permits DNS requests only from the IP address 10.50.10.25 while denying others."
     },
     {
-        "question": "What does RSN stand for?",
+        "question": "Which of the following would be the best way to block unknown programs from executing?",
         "options": [
-            "Robust Security Network",
-            "Reliable Security Network",
-            "Robust Signal Network",
-            "Reliable Signal Network"
+            "Access control list",
+            "Application allow list",
+            "Host-based firewall",
+            "DLP solution"
         ],
-        "correct_answer": 1,
-        "description": "RSN (Robust Security Network) - A security protocol for establishing secure communications over a Wi-Fi network, including WPA2 and WPA3."
+        "correct_answer": 2,
+        "description": "An application allow list (also known as whitelisting) only allows pre-approved applications to run, blocking unknown or unauthorized programs."
     },
     {
-        "question": "What does RSSI stand for?",
+        "question": "A company’s web filter is configured to scan the URL for strings and deny access when matches are found. Which of the following search strings should an analyst employ to prohibit access to non-encrypted websites?",
         "options": [
-            "Received Signal Strength Indicator",
-            "Reliable Signal Strength Indicator",
-            "Received Signal Strength Index",
-            "Reliable Signal Strength Index"
+            "encryption=off",
+            "http://",
+            "www.*.com",
+            ":443"
         ],
-        "correct_answer": 1,
-        "description": "RSSI (Received Signal Strength Indicator) - A measurement of the power present in a received radio signal, often used in Wi-Fi networks to determine the strength of the signal."
+        "correct_answer": 2,
+        "description": "The search string 'http://' should be used to prohibit access to non-encrypted websites."
     },
     {
-        "question": "What does RBAC stand for?",
+        "question": "A systems administrator works for a local hospital and needs to ensure patient data is protected and secure. Which of the following data classifications should be used to secure patient data?",
         "options": [
-            "Role Based Access Control",
-            "Remote Based Access Control",
-            "Role Based Authentication Control",
-            "Remote Based Authentication Control"
+            "Private",
+            "Critical",
+            "Sensitive",
+            "Public"
         ],
-        "correct_answer": 1,
-        "description": "RBAC (Role Based Access Control) - An approach to restricting system access to authorized users based on their roles within an organization."
+        "correct_answer": 3,
+        "description": "Sensitive data classification is appropriate for securing patient data, which requires protection due to privacy regulations like HIPAA."
     },
     {
-        "question": "What does BSSID stand for?",
+        "question": "A company is required to use certified hardware when building networks. Which of the following best addresses the risks associated with procuring counterfeit hardware?",
         "options": [
-            "Basic Service Set Identifier",
-            "Broadcast Service Set Identifier",
-            "Basic Signal Set Identifier",
-            "Broadcast Signal Set Identifier"
+            "A thorough analysis of the supply chain",
+            "A legally enforceable corporate acquisition policy",
+            "A right to audit clause in vendor contracts and SOWs",
+            "An in-depth penetration test of all suppliers and vendors"
         ],
         "correct_answer": 1,
-        "description": "BSSID (Basic Service Set Identifier) - The unique identifier (MAC address) of a specific access point in a Wi-Fi network."
+        "description": "A thorough analysis of the supply chain is the best approach to address the risks associated with procuring counterfeit hardware."
+    },
+
+# Security Operations
+
+    {
+        "question": "Which of the following should a security administrator adhere to when setting up a new set of firewall rules?",
+        "options": [
+            "Disaster recovery plan",
+            "Incident response procedure",
+            "Business continuity plan",
+            "Change management procedure"
+        ],
+        "correct_answer": 4,
+        "description": "A security administrator should adhere to the change management procedure when setting up new firewall rules."
     },
     {
-        "question": "What does SIFS stand for?",
+        "question": "During a security incident, the security operations team identified sustained network traffic from a malicious IP address: 10.1.4.9. A security analyst is creating an inbound firewall rule to block the IP address from accessing the organization’s network. Which of the following fulfills this request?",
         "options": [
-            "Short Interframe Space",
-            "Signal Interframe Space",
-            "Short Interference Space",
-            "Signal Interference Space"
+            "access-list inbound deny ip source 0.0.0.0/0 destination 10.1.4.9/32",
+            "access-list inbound deny ip source 10.1.4.9/32 destination 0.0.0.0/0",
+            "access-list inbound permit ip source 10.1.4.9/32 destination 0.0.0.0/0",
+            "access-list inbound permit ip source 0.0.0.0/0 destination 10.1.4.9/32"
         ],
-        "correct_answer": 1,
-        "description": "SIFS (Short Interframe Space) - A short wait time used in Wi-Fi networks between the transmission of data frames and control frames to ensure proper timing."
+        "correct_answer": 2,
+        "description": "The correct firewall rule to block inbound traffic from the malicious IP address is: access-list inbound deny ip source 10.1.4.9/32 destination 0.0.0.0/0."
     },
     {
-        "question": "What does WMM stand for?",
+        "question": "A technician needs to apply a high-priority patch to a production system. Which of the following steps should be taken first?",
         "options": [
-            "Wi-Fi Multimedia",
-            "Wireless Multimedia",
-            "Wi-Fi Management",
-            "Wireless Management"
+            "Air gap the system.",
+            "Move the system to a different network segment.",
+            "Create a change control request.",
+            "Apply the patch to the system."
+        ],
+        "correct_answer": 3,
+        "description": "Creating a change control request is essential before applying patches to ensure proper review and approval of the changes."
+    },
+    {
+        "question": "A company needs to provide administrative access to internal resources while minimizing the traffic allowed through the security boundary. Which of the following methods is most secure?",
+        "options": [
+            "Implementing a bastion host",
+            "Deploying a perimeter network",
+            "Installing a WAF",
+            "Utilizing single sign-on"
         ],
         "correct_answer": 1,
-        "description": "WMM (Wi-Fi Multimedia) - A subset of the IEEE 802.11e standard that provides Quality of Service (QoS) features to ensure optimal performance for audio, video, and voice applications over Wi-Fi."
+        "description": "Implementing a bastion host is the most secure method to provide administrative access while minimizing traffic through the security boundary."
+    },
+    {
+        "question": "An administrator was notified that a user logged in remotely after hours and copied large amounts of data to a personal device. Which of the following best describes the user’s activity?",
+        "options": [
+            "Penetration testing",
+            "Phishing campaign",
+            "External audit",
+            "Insider threat"
+        ],
+        "correct_answer": 4,
+        "description": "An insider threat refers to a security risk that comes from within the organization, such as an employee or contractor who misuses access to company data."
+    },
+    {
+        "question": "Which of the following can be used to identify potential attacker activities without affecting production servers?",
+        "options": [
+            "Honeypot",
+            "Video surveillance",
+            "Zero Trust",
+            "Geofencing"
+        ],
+        "correct_answer": 1,
+        "description": "A honeypot is a decoy system set up to attract attackers and observe their behavior without impacting the production environment."
+    },
+    {
+        "question": "During an investigation, an incident response team attempts to understand the source of an incident. Which of the following incident response activities describes this process?",
+        "options": [
+            "Analysis",
+            "Lessons learned",
+            "Detection",
+            "Containment"
+        ],
+        "correct_answer": 1,
+        "description": "Analysis is the process of examining the details of an incident to determine its cause, impact, and any potential vulnerabilities that were exploited."
+    },
+    {
+        "question": "A security practitioner completes a vulnerability assessment on a company’s network and finds several vulnerabilities, which the operations team remediates. Which of the following should be done next?",
+        "options": [
+            "Conduct an audit.",
+            "Initiate a penetration test.",
+            "Rescan the network.",
+            "Submit a report."
+        ],
+        "correct_answer": 3,
+        "description": "After remediating vulnerabilities, a rescan of the network is necessary to verify that the issues have been properly fixed and no new vulnerabilities have been introduced."
+    },
+
+# Security Program Management and Oversight
+
+    {
+        "question": "An IT manager informs the entire help desk staff that only the IT manager and the help desk lead will have access to the administrator console of the help desk software. Which of the following security techniques is the IT manager setting up?",
+        "options": [
+            "Hardening",
+            "Employee monitoring",
+            "Configuration enforcement",
+            "Least privilege"
+        ],
+        "correct_answer": 4,
+        "description": "The IT manager is setting up the least privilege security technique."
+    },
+    {
+        "question": "Which of the following security control types does an acceptable use policy best represent?",
+        "options": [
+            "Detective",
+            "Compensating",
+            "Corrective",
+            "Preventive"
+        ],
+        "correct_answer": 4,
+        "description": "An acceptable use policy is a preventive control type."
+    },
+    {
+        "question": "A software development manager wants to ensure the authenticity of the code created by the company. Which of the following options is the most appropriate?",
+        "options": [
+            "Testing input validation on the user input fields",
+            "Performing code signing on company-developed software",
+            "Performing static code analysis on the software",
+            "Ensuring secure cookies are used"
+        ],
+        "correct_answer": 2,
+        "description": "Code signing is the process of digitally signing software to verify its authenticity and integrity, ensuring that it hasn't been tampered with."
+    },
+    {
+        "question": "Which of the following is the most likely to be used to document risks, responsible parties, and thresholds?",
+        "options": [
+            "Risk tolerance",
+            "Risk transfer",
+            "Risk register",
+            "Risk analysis"
+        ],
+        "correct_answer": 3,
+        "description": "A risk register is used to document risks, responsible parties, and thresholds."
+    },
+    {
+        "question": "Which of the following provides the details about the terms of a test with a third-party penetration tester?",
+        "options": [
+            "Rules of engagement",
+            "Supply chain analysis",
+            "Right to audit clause",
+            "Due diligence"
+        ],
+        "correct_answer": 1,
+        "description": "Rules of engagement provide the details about the terms of a test with a third-party penetration tester."
     }
 ]
