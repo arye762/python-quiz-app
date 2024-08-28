@@ -1,16 +1,17 @@
 import random
 import os
 import time
-from questions_set1 import questions_set1  # Import the first set of questions
-from questions_set2 import questions_set2  # Import the second set of questions
+import subprocess
+import webbrowser  # Import the webbrowser module
+from PIL import Image  # Import the PIL library to handle images
 
-def ask_question(question_num, total_questions, question, options, correct_answer, description):
+
+def ask_question(question_num, total_questions, question, options, correct_answer, description, image=None):
     os.system('clear')  # Clear the screen before each question
-    
-    # Display the score and elapsed time
+
     print(f"Score: {score} | Time: {time_elapsed()}")
 
-    # Randomize the correct answer position while keeping the numbering 1-4
+    # Randomize the correct answer position
     indices = list(range(len(options)))
     random.shuffle(indices)
     shuffled_options = [options[i] for i in indices]
@@ -19,15 +20,31 @@ def ask_question(question_num, total_questions, question, options, correct_answe
         shuffled_correct_answer = [indices.index(ans - 1) + 1 for ans in correct_answer]
     else:
         shuffled_correct_answer = indices.index(correct_answer - 1) + 1
-    
-    # Display the question number and question out of the total
+
     print(f"\nQuestion {question_num} of {total_questions}\n")
     print(f"{question}\n")
-    
-    # Display options with correct numbering
+
+    # Display the image if provided and enabled
+    if image and image_enabled:
+        try:
+            print(f"Loading image: {image}")  # Debugging: print the image path
+
+            # Close the Preview app before showing the new image
+            subprocess.call(["osascript", "-e", 'tell application "Preview" to quit'])
+
+            # Open the image directly with Preview
+            subprocess.call(["open", image])
+
+            time.sleep(1)  # Give time for the image to display
+
+            # Bring terminal back to the foreground
+            subprocess.call(["osascript", "-e", 'tell application "Terminal" to activate'])
+
+        except Exception as e:
+            print(f"Error loading image: {e}")
+
     for idx, option in enumerate(shuffled_options, 1):
         print(f"{idx}. {option}")
-
     print()  # Add a blank line for spacing
     
     answer = input("Choose the correct option (e.g., '1 4' for multiple answers), or 'b' to go back: ").strip()
@@ -37,18 +54,13 @@ def ask_question(question_num, total_questions, question, options, correct_answe
         return None, False  # Go back without saving an answer
 
     try:
-        # Parse the user's answer into a list of integers
         user_answers = list(map(int, answer.split()))
     except ValueError:
         print("\nInvalid input. Please enter numbers separated by spaces.\n")
         return None, False
 
-    # Determine if the answer was correct
     correct_text = [options[i - 1] for i in correct_answer] if isinstance(correct_answer, list) else options[correct_answer - 1]
-    if isinstance(correct_answer, list):
-        is_correct = sorted(user_answers) == sorted(shuffled_correct_answer)
-    else:
-        is_correct = user_answers == [shuffled_correct_answer]
+    is_correct = sorted(user_answers) == sorted(shuffled_correct_answer) if isinstance(correct_answer, list) else user_answers == [shuffled_correct_answer]
     
     if is_correct:
         print("\nCorrect!\n")
@@ -56,29 +68,26 @@ def ask_question(question_num, total_questions, question, options, correct_answe
         print("\nWrong!\n")
         print(f"The correct answer is: {correct_text}\n")
     
-    # Show the description after the answer is given
     print(f"Description: {description}\n")
 
     input("Press Enter to continue...")  # Pause before moving to the next question
 
+    # Close the image before moving to the next question if images are enabled
+    if image_enabled:
+        subprocess.call(["osascript", "-e", 'tell application "Preview" to quit'])
+
     return answer, is_correct
+
 
 def select_questions_set():
     print("Select the set of questions you want to answer:")
-    print("1. Question Set 1")
-    print("2. Question Set 2")
-    print("3. Both Sets of Questions")
     choice = input("Enter the number of your choice: ").strip()
 
     if choice == '1':
-        return questions_set1
     elif choice == '2':
-        return questions_set2
     elif choice == '3':
         return questions_set1 + questions_set2
     else:
-        print("Invalid choice. Defaulting to both sets of questions.")
-        return questions_set1 + questions_set2
 
 def choose_ordering():
     print("\nHow would you like the questions to be ordered?")
@@ -94,6 +103,20 @@ def choose_ordering():
         print("Invalid choice. Defaulting to randomized order.")
         return True
 
+def enable_images():
+    print("\nWould you like to enable images in the questions?")
+    print("1. Yes")
+    print("2. No")
+    choice = input("Enter the number of your choice: ").strip()
+
+    if choice == '1':
+        return True
+    elif choice == '2':
+        return False
+    else:
+        print("Invalid choice. Defaulting to images enabled.")
+        return True
+
 def time_elapsed():
     elapsed_time = time.time() - start_time
     minutes = int(elapsed_time // 60)
@@ -102,6 +125,7 @@ def time_elapsed():
 
 def main():
     global score
+    global image_enabled
     score = 0
     wrong_questions = []
     global start_time
@@ -112,16 +136,27 @@ def main():
     # Choose whether to randomize the questions or keep them in order
     randomize_order = choose_ordering()
 
+    # Enable or disable images
+    image_enabled = enable_images()
+
     if randomize_order:
         random.shuffle(selected_questions)
 
     answers = [None] * len(selected_questions)  # To keep track of user answers
     total_questions = len(selected_questions)  # Total number of questions
-    current_question = 0
+    current_question = 0 
 
     while current_question < len(selected_questions):
         q = selected_questions[current_question]
-        answer, is_correct = ask_question(current_question + 1, total_questions, q["question"], q["options"], q["correct_answer"], q["description"])
+        answer, is_correct = ask_question(
+            current_question + 1, 
+            total_questions, 
+            q["question"], 
+            q["options"], 
+            q["correct_answer"], 
+            q["description"],
+            q.get("image", None)  # Pass the image path if it exists
+        )
         
         if answer is not None:
             if answers[current_question] is None:  # Only add to score if it's the first attempt at the question
@@ -151,7 +186,15 @@ def main():
             print("\nRepeating wrong questions...\n")
             for i in wrong_questions:
                 q = selected_questions[i]
-                answer, is_correct = ask_question(i + 1, total_questions, q["question"], q["options"], q["correct_answer"], q["description"])
+                answer, is_correct = ask_question(
+                    i + 1, 
+                    total_questions, 
+                    q["question"], 
+                    q["options"], 
+                    q["correct_answer"], 
+                    q["description"],
+                    q.get("image", None)  # Pass the image path if it exists
+                )
                 
                 # Allow re-answering the question
                 if answer is not None:
